@@ -1,1 +1,1 @@
-include ':app', ':logutil'
+include ':app', ':logutil', ':skindemo', ':skindemo2'
