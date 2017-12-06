@@ -1,6 +1,7 @@
 package plugin.charles.com.plugindemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -145,6 +146,14 @@ public class MainActivity extends AppCompatActivity {
             return appInfo.packageName;
         }
         return "";
+    }
+
+    /**
+     * hookActivity
+     */
+    public void hookActivity(View view){
+        Intent intent = new Intent(this, OtherActivity.class);
+        startActivity(intent);
     }
 
 }
