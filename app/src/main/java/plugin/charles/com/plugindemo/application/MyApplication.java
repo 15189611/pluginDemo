@@ -14,6 +14,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         HookUtils hookUtil = new HookUtils(ProxyActivity.class, this);
+        hookUtil.hookSystemHandler();
         hookUtil.hookAms();
     }
 
