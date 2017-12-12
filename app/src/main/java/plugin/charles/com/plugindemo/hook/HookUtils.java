@@ -12,13 +12,14 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+import plugin.charles.com.plugindemo.util.DLConstants;
+
 /**
  * Created by 666 on 2017/12/6.
  */
 
 public class HookUtils {
     private Class<?> proxyActivity;
-
     private Context context;
 
     public HookUtils(Class<?> proxyActivity, Context context) {
@@ -92,6 +93,9 @@ public class HookUtils {
                 Intent proxyIntent = new Intent();
                 ComponentName componentName = new ComponentName(context, proxyActivity);
                 proxyIntent.setComponent(componentName);
+                proxyIntent.putExtra(DLConstants.EXTRA_CLASS, intent.getStringExtra(DLConstants.EXTRA_CLASS));
+                proxyIntent.putExtra(DLConstants.EXTRA_PACKAGE, intent.getStringExtra(DLConstants.EXTRA_PACKAGE));
+
                 proxyIntent.putExtra("oldIntent", intent);
                 args[index] = proxyIntent;
             }
@@ -100,31 +104,23 @@ public class HookUtils {
         }
     }
 
-    public void hookSystemHandler(){
+    public void hookSystemHandler() {
         try {
             Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
             Method currentActivityThread = activityThreadClass.getDeclaredMethod("currentActivityThread");
             currentActivityThread.setAccessible(true);
             //获取主线程对象
-            Object activityThread  = currentActivityThread.invoke(null);
+            Object activityThread = currentActivityThread.invoke(null);
 
             Field mH = activityThreadClass.getDeclaredField("mH");
             mH.setAccessible(true);
-            Handler handler  = (Handler) mH.get(activityThread);
+            Handler handler = (Handler) mH.get(activityThread);
             Field mCallback = Handler.class.getField("mCallback");
             mCallback.setAccessible(true);
             //设置自己实现的CallBack
-            mCallback.set(handler,new ActivityThreadHandlerCallback(handler));
+            mCallback.set(handler, new ActivityThreadHandlerCallback(handler));
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

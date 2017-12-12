@@ -1,4 +1,4 @@
-package plugin.charles.com.plugindemo.hook;
+package plugin.charles.com.plugindemo.plugin;
 
 import android.app.Activity;
 import android.content.Intent;
