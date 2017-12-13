@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 
 import dalvik.system.DexClassLoader;
 import plugin.charles.com.plugindemo.hook.PluginManager;
+import plugin.charles.com.plugindemo.plugin.OtherActivity;
 import plugin.charles.com.plugindemo.util.DLConstants;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void hookActivity(View view) {
         Intent intent = new Intent(this, OtherActivity.class);
-        intent.putExtra(DLConstants.EXTRA_CLASS, "plugin.charles.com.plugindemo.OtherActivity");
+        intent.putExtra(DLConstants.EXTRA_CLASS, "plugin.charles.com.plugindemo.plugin.OtherActivity");
         intent.putExtra(DLConstants.EXTRA_PACKAGE, "plugin.charles.com.plugindemo");
         startActivity(intent);
     }

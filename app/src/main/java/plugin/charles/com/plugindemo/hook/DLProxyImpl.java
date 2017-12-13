@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
 import java.lang.reflect.Constructor;
 
@@ -33,16 +32,17 @@ public class DLProxyImpl {
         if (intent != null) {
             mPackageName = intent.getStringExtra(DLConstants.EXTRA_PACKAGE);
             mClass = intent.getStringExtra(DLConstants.EXTRA_CLASS);
-            Log.e("Charles2", "mPackageName==" + mPackageName + "----mClass==" + mClass);
         }
+        launchTargetActivity();
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     protected void launchTargetActivity() {
         try {
-            Class<?> localClass = getClassLoader().loadClass(mClass);
-            Constructor<?> localConstructor = localClass.getConstructor(new Class[] {});
-            Object instance = localConstructor.newInstance(new Object[] {});
+            Class<?> localClass = mProxyActivity.getClassLoader().loadClass(mClass);
+            //Class<?> localClass = getClassLoader().loadClass(mClass);
+            Constructor<?> localConstructor = localClass.getConstructor(new Class[]{});
+            Object instance = localConstructor.newInstance(new Object[]{});
             mPluginActivity = (DLPlugin) instance;
 
             ((DLAttachable) mProxyActivity).attach(mPluginActivity);
@@ -50,7 +50,6 @@ public class DLProxyImpl {
             mPluginActivity.attach(mProxyActivity);
 
             Bundle bundle = new Bundle();
-          //  bundle.putInt(DLConstants.FROM, DLConstants.FROM_EXTERNAL);
             mPluginActivity.onCreate(bundle);
         } catch (Exception e) {
             e.printStackTrace();

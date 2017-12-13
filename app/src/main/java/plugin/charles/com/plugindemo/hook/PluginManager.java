@@ -128,7 +128,7 @@ public class PluginManager {
      * @param pApkFilePath apk文件的path
      * @return
      */
-    public  String getUninstallApkPkgName(Context context, String pApkFilePath) {
+    public String getUninstallApkPkgName(Context context, String pApkFilePath) {
         PackageManager pm = context.getPackageManager();
         PackageInfo pkgInfo = pm.getPackageArchiveInfo(pApkFilePath, PackageManager.GET_ACTIVITIES);
         if (pkgInfo != null) {
@@ -146,7 +146,5 @@ public class PluginManager {
         DexClassLoader loader = new DexClassLoader(dexPath, dexOutputPath, null, context.getClassLoader());
         return loader;
     }
-
-
 
 }

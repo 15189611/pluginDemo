@@ -3,6 +3,11 @@ package plugin.charles.com.plugindemo.plugin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.WindowManager;
 
 /**
  * @author 17111980
@@ -20,6 +25,7 @@ public class DLBasePluginActivity extends Activity implements DLPlugin {
      * 可以当作this来使用
      */
     protected Activity that;
+    private int type = 0;
 
     @Override
     public void attach(Activity proxyActivity) {
@@ -29,56 +35,106 @@ public class DLBasePluginActivity extends Activity implements DLPlugin {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        if (type == 1) {
+            super.onCreate(savedInstanceState);
+        }
     }
 
     @Override
     public void onStart() {
-        super.onStart();
+        if (type == 1) {
+            super.onStart();
+        }
     }
 
     @Override
     public void onRestart() {
-        super.onRestart();
+        if (type == 1) {
+            super.onRestart();
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     @Override
     public void onResume() {
-        super.onResume();
+        if (type == 1) {
+            super.onResume();
+        }
     }
 
     @Override
     public void onPause() {
-        super.onPause();
+        if (type == 1) {
+            super.onPause();
+        }
     }
 
     @Override
     public void onStop() {
-        super.onStop();
+        if (type == 1) {
+            super.onStop();
+        }
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        if (type == 1) {
+            super.onDestroy();
+        }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+
     }
 
     @Override
     public void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
+
     }
 
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
+
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return false;
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        return false;
+    }
+
+    @Override
+    public void onWindowAttributesChanged(WindowManager.LayoutParams params) {
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return false;
+    }
+
 }

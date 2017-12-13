@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
@@ -75,7 +74,6 @@ public class HookUtils {
             //我要在这里搞点事情
             if ("startActivity".contains(method.getName())) {
                 Log.e("HookUtil", "Activity已经开始启动");
-                Log.e("HookUtil", "小弟到此一游！！！");
 
                 //替换Intent 先找到原始的intent,然后直接伪造一个Intent 给AMS
                 Intent intent = null;
