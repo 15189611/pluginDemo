@@ -16,24 +16,25 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import dalvik.system.DexClassLoader;
 import plugin.charles.com.plugindemo.hook.PluginManager;
 import plugin.charles.com.plugindemo.plugin.OtherActivity;
 import plugin.charles.com.plugindemo.util.DLConstants;
+import plugin.charles.com.pluginlib.DLIntent;
+import plugin.charles.com.pluginlib.DLPluginPackage;
 
 public class MainActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
     private PluginManager instance;
 
+    private DLPluginPackage pluginPackage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         linearLayout = (LinearLayout) findViewById(R.id.bg);
         instance = PluginManager.getInstance(this);
+        final String path = Environment.getExternalStorageDirectory() + File.separator + "plugin-a-debug.apk" ;
+        pluginPackage = plugin.charles.com.pluginlib.PluginManager.getInstance(this).loadApk(path);
     }
 
     //动态加载dex文件  这里是个jar 包里面的方法
@@ -74,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(DLConstants.EXTRA_CLASS, "plugin.charles.com.plugindemo.plugin.OtherActivity");
         intent.putExtra(DLConstants.EXTRA_PACKAGE, "plugin.charles.com.plugindemo");
         startActivity(intent);
+    }
+
+    public void startPlugin(View view){
+        plugin.charles.com.pluginlib.PluginManager instance = plugin.charles.com.pluginlib.PluginManager.getInstance(this);
+        instance.startPluginActivity(this,new DLIntent(pluginPackage.packerName,pluginPackage.packageInfo.activities[0].name));
     }
 
 }

@@ -1,1 +1,1 @@
-include ':app', ':logutil', ':skindemo', ':skindemo2', ':plugin-a'
+include ':app', ':logutil', ':skindemo', ':skindemo2', ':plugin-a', ':pluginlib'

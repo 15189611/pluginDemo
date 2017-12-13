@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 26
     buildToolsVersion "27.0.1"
 
     defaultConfig {
-        applicationId "plugin.charles.com.plugina"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -28,6 +27,23 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
 }
+
+//Copy类型
+task makeJar(type: Copy) {
+    //删除存在的
+    delete 'build/libs/plugin.jar'
+    //设置拷贝的文件
+    from('build/intermediates/bundles/debug/')
+    //打进jar包后的文件目录
+    into('build/libs/')
+    //将classes.jar放入build/libs/目录下
+    //include ,exclude参数来设置过滤
+    //（我们只关心classes.jar这个文件）
+    include('classes.jar')
+    //重命名
+    rename ('classes.jar', 'plugin.jar')
+}
+
+makeJar.dependsOn(build)

@@ -13,9 +13,9 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        HookUtils hookUtil = new HookUtils(ProxyActivity.class, this);
+        /*HookUtils hookUtil = new HookUtils(ProxyActivity.class, this);
         hookUtil.hookSystemHandler();
-        hookUtil.hookAms();
+        hookUtil.hookAms();*/
     }
 
 }

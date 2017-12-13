@@ -22,6 +22,7 @@
 
         <activity android:name=".hook.ProxyActivity"></activity>
 
+        <activity android:name="plugin.charles.com.pluginlib.DLProxyActivity"/>
     </application>
 
 </manifest>
