@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     *  使用Hook思想（市场大部分用-->推荐）
      * hookActivity(启动一个无注册的activity)
      */
     public void hookActivity(View view) {
@@ -77,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * 使用DynamicLoadApk 代理思想
+     * @param view
+     */
     public void startPlugin(View view){
         plugin.charles.com.pluginlib.PluginManager instance = plugin.charles.com.pluginlib.PluginManager.getInstance(this);
         instance.startPluginActivity(this,new DLIntent(pluginPackage.packerName,pluginPackage.packageInfo.activities[0].name));

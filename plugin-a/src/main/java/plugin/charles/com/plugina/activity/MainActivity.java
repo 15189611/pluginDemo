@@ -13,4 +13,9 @@ public class MainActivity extends DLBasePluginActivity {
         setContentView(R.layout.activity_main_plugin);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

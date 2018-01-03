@@ -47,9 +47,8 @@ public class DLProxyImpl {
     }
 
     public void onCreate(Intent intent) {
-        intent.setExtrasClassLoader(DLConfigs.sPluginClassloader);
-
         if (intent != null) {
+            intent.setExtrasClassLoader(DLConfigs.sPluginClassloader);
             mPackageName = intent.getStringExtra(DLConstants.EXTRA_PACKAGE);
             mClass = intent.getStringExtra(DLConstants.EXTRA_CLASS);
             Log.d(TAG, "mClass=" + mClass + " mPackageName=" + mPackageName);
